@@ -14,21 +14,28 @@ Aarogya is an end-to-end digital healthcare and lobby coordination platform desi
 Aarogya bridges the gap between digital appointment booking at home and physical queue management in the lobby:
 
 ```mermaid
-flowchart TD
-    subgraph At Home
-    A["Symptom Search"] --> B["Pick Doctor Slot"] --> C["Book Appointment"]
+flowchart LR
+    subgraph Home ["🏠 At Home"]
+    A["Symptom Search"] --> B["Select Slot"] --> C["Book Appointment"]
     end
-    subgraph Clinic Lobby
-    C -->|Patient arrives| D["Staff Check-In"]
-    D -->|Active live token| E["WebSocket Lobby Queue"]
+    subgraph Lobby ["📋 Clinic Lobby"]
+    C -->|Arrives| D["Staff Check-In"]
+    D -->|Active Token| E["Lobby Queue"]
     end
-    subgraph Consultation Room
+    subgraph Room ["🩺 Consult Room"]
     E -->|Call Next| F["Clinician EMR"]
-    F -->|Consultation & Rx| G["Patient Record Updated"]
+    F -->|Consultation| G["Rx & EMR Update"]
     end
-    style A fill:#e0f2fe,stroke:#0284c7,stroke-width:2px
-    style D fill:#f0fdf4,stroke:#16a34a,stroke-width:2px
-    style F fill:#faf5ff,stroke:#7c3aed,stroke-width:2px
+
+    style A fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0369a1
+    style B fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0369a1
+    style C fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0369a1
+    
+    style D fill:#f0fdf4,stroke:#16a34a,stroke-width:2px,color:#15803d
+    style E fill:#f0fdf4,stroke:#16a34a,stroke-width:2px,color:#15803d
+    
+    style F fill:#faf5ff,stroke:#7c3aed,stroke-width:2px,color:#6d28d9
+    style G fill:#faf5ff,stroke:#7c3aed,stroke-width:2px,color:#6d28d9
 ```
 
 ---
