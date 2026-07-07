@@ -5,8 +5,7 @@ import { searchSymptoms } from '../shared/services/symptomService'
 import { matchSymptom, getSpecialtyLabel } from '../shared/utils/symptomMapper'
 import SearchBar from './SearchBar'
 import HospitalList from './HospitalList'
-import Header from '../shared/components/Header'
-import Footer from '../shared/components/Footer'
+import PageShell from '../shared/components/PageShell'
 
 function SearchPage() {
   const [searchParams, setSearchParams] = useSearchParams()
@@ -78,17 +77,12 @@ function SearchPage() {
   const localMatch = hasQuery ? matchSymptom(submittedQuery) : null
 
   return (
-    <div className="flex min-h-screen flex-col bg-slate-50 text-slate-950">
-      <Header />
-      
-      <main className="flex-1 mx-auto max-w-7xl w-full px-5 py-8">
-        <header className="mb-6 text-left">
-          <h1 className="text-3xl font-bold md:text-4xl text-slate-900">Find a doctor near you</h1>
-          <p className="mt-2 text-slate-600">
-            Search by symptom, disease, or specialty. We map it to the right doctor and show nearby clinics with open slots.
-          </p>
-        </header>
-
+    <PageShell
+      eyebrow="Care Search"
+      title="Find a doctor near you"
+      description="Search by symptom, disease, or specialty. We map it to the right doctor and show nearby clinics with open slots."
+    >
+      <div className="space-y-6">
         <SearchBar
           onChange={setQuery}
           onSubmit={handleSubmit}
@@ -97,15 +91,15 @@ function SearchPage() {
         />
 
         {error ? (
-          <div className="mt-6 rounded-lg border border-rose-200 bg-rose-50 p-4 text-sm text-rose-800">
+          <div className="rounded-xl border border-rose-150 bg-rose-50/70 p-4 text-xs font-semibold leading-relaxed text-rose-700">
             {error}
           </div>
         ) : null}
 
-        <div className="mt-8">
+        <div className="mt-2">
           {hasQuery ? (
             loading ? (
-              <p className="text-slate-600 text-left">Searching hospitals...</p>
+              <p className="text-xs text-slate-500 font-semibold animate-pulse">Searching hospitals...</p>
             ) : (
               <HospitalList
                 matchedKeyword={matchedKeyword}
@@ -116,16 +110,14 @@ function SearchPage() {
               />
             )
           ) : (
-            <div className="space-y-2 rounded-lg border border-slate-200 bg-white p-6 text-center text-slate-600 shadow-sm">
-              <p className="text-lg font-semibold text-slate-950">Start your search above</p>
-              <p>Type a symptom like &ldquo;fever&rdquo; or &ldquo;chest pain&rdquo;, or pick a specialty chip to see nearby hospitals with available doctors.</p>
+            <div className="rounded-2xl border border-slate-100 bg-white/80 backdrop-blur-sm p-6 text-center shadow-premium-sm space-y-2">
+              <p className="text-sm font-bold text-slate-800">Start your search above</p>
+              <p className="text-xs text-slate-500 font-medium">Type a symptom like "fever" or "chest pain", or pick a specialty chip to see nearby hospitals with available doctors.</p>
             </div>
           )}
         </div>
-      </main>
-
-      <Footer />
-    </div>
+      </div>
+    </PageShell>
   )
 }
 

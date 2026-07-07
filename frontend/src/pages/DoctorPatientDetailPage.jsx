@@ -79,24 +79,24 @@ function ConsultationForm({ patientId, doctorId, onSaved }) {
   }
 
   return (
-    <form className="space-y-3" onSubmit={submit}>
-      <div className="grid gap-3 sm:grid-cols-2">
+    <form className="space-y-4" onSubmit={submit}>
+      <div className="grid gap-4 sm:grid-cols-2">
         <div>
-          <label className="block text-xs font-medium text-slate-600" htmlFor="cons-date">Date</label>
+          <label className="block text-2xs font-bold uppercase tracking-wider text-slate-400" htmlFor="cons-date">Date</label>
           <input
             id="cons-date"
             type="date"
-            className="mt-1 w-full rounded-md border border-slate-300 px-3 py-2 text-sm focus:border-emerald-500 focus:outline-none"
+            className="mt-1.5 w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-2.5 text-sm text-slate-900 outline-none focus:border-emerald-500 focus:bg-white focus:ring-2 focus:ring-emerald-500/10 transition duration-200"
             value={form.date}
             onChange={update('date')}
           />
         </div>
         <div>
-          <label className="block text-xs font-medium text-slate-600" htmlFor="cons-reason">Reason for visit</label>
+          <label className="block text-2xs font-bold uppercase tracking-wider text-slate-400" htmlFor="cons-reason">Reason for visit</label>
           <input
             id="cons-reason"
             type="text"
-            className="mt-1 w-full rounded-md border border-slate-300 px-3 py-2 text-sm focus:border-emerald-500 focus:outline-none"
+            className="mt-1.5 w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 outline-none focus:border-emerald-500 focus:bg-white focus:ring-2 focus:ring-emerald-500/10 transition duration-200"
             placeholder="Chest pain, follow-up..."
             value={form.reason}
             onChange={update('reason')}
@@ -104,45 +104,45 @@ function ConsultationForm({ patientId, doctorId, onSaved }) {
         </div>
       </div>
       <div>
-        <label className="block text-xs font-medium text-slate-600" htmlFor="cons-diagnosis">Diagnosis *</label>
+        <label className="block text-2xs font-bold uppercase tracking-wider text-slate-400" htmlFor="cons-diagnosis">Diagnosis *</label>
         <input
           id="cons-diagnosis"
           type="text"
-          className="mt-1 w-full rounded-md border border-slate-300 px-3 py-2 text-sm focus:border-emerald-500 focus:outline-none"
+          className="mt-1.5 w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 outline-none focus:border-emerald-500 focus:bg-white focus:ring-2 focus:ring-emerald-500/10 transition duration-200"
           placeholder="Primary diagnosis"
           value={form.diagnosis}
           onChange={update('diagnosis')}
         />
       </div>
       <div>
-        <label className="block text-xs font-medium text-slate-600" htmlFor="cons-prescription">Prescription</label>
+        <label className="block text-2xs font-bold uppercase tracking-wider text-slate-400" htmlFor="cons-prescription">Prescription</label>
         <input
           id="cons-prescription"
           type="text"
-          className="mt-1 w-full rounded-md border border-slate-300 px-3 py-2 text-sm focus:border-emerald-500 focus:outline-none"
+          className="mt-1.5 w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 outline-none focus:border-emerald-500 focus:bg-white focus:ring-2 focus:ring-emerald-500/10 transition duration-200"
           placeholder="Drug, dose, duration"
           value={form.prescription}
           onChange={update('prescription')}
         />
       </div>
       <div>
-        <label className="block text-xs font-medium text-slate-600" htmlFor="cons-notes">Remarks / notes</label>
+        <label className="block text-2xs font-bold uppercase tracking-wider text-slate-400" htmlFor="cons-notes">Remarks / notes</label>
         <textarea
           id="cons-notes"
           rows={3}
-          className="mt-1 w-full rounded-md border border-slate-300 px-3 py-2 text-sm focus:border-emerald-500 focus:outline-none"
+          className="mt-1.5 w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 outline-none focus:border-emerald-500 focus:bg-white focus:ring-2 focus:ring-emerald-500/10 transition duration-200"
           placeholder="Observations, advice, next steps..."
           value={form.notes}
           onChange={update('notes')}
         />
       </div>
-      {error ? <p className="text-sm text-rose-700">{error}</p> : null}
+      {error ? <p className="text-xs font-semibold text-rose-600">{error}</p> : null}
       <button
         type="submit"
         disabled={isSaving}
-        className="rounded-md bg-emerald-700 px-4 py-2 text-sm font-semibold text-white hover:bg-emerald-800 disabled:cursor-not-allowed disabled:bg-slate-300"
+        className="rounded-xl bg-emerald-600 px-5 py-3 text-xs font-bold text-white shadow-lg shadow-emerald-600/10 hover:bg-emerald-700 hover:shadow-emerald-700/20 active:scale-[0.98] transition-all duration-200 disabled:cursor-not-allowed disabled:bg-slate-200 disabled:text-slate-400 disabled:shadow-none cursor-pointer uppercase tracking-wider"
       >
-        {isSaving ? 'Saving...' : 'Save consultation'}
+        {isSaving ? 'Saving...' : 'Save Consultation'}
       </button>
     </form>
   )
@@ -182,13 +182,13 @@ function ReminderForm({ patientId, doctorId, onSaved }) {
   }
 
   return (
-    <form className="space-y-3" onSubmit={submit}>
+    <form className="space-y-4" onSubmit={submit}>
       <div>
-        <label className="block text-xs font-medium text-slate-600" htmlFor="rem-message">Reminder message *</label>
+        <label className="block text-2xs font-bold uppercase tracking-wider text-slate-500" htmlFor="rem-message">Reminder message *</label>
         <textarea
           id="rem-message"
           rows={2}
-          className="mt-1 w-full rounded-md border border-slate-300 px-3 py-2 text-sm focus:border-emerald-500 focus:outline-none"
+          className="mt-1.5 w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 outline-none focus:border-emerald-500 focus:bg-white focus:ring-2 focus:ring-emerald-500/10 transition duration-200"
           placeholder="Repeat lipid profile and review BP diary."
           value={form.message}
           onChange={(event) => setForm((current) => ({ ...current, message: event.target.value }))}
@@ -196,28 +196,28 @@ function ReminderForm({ patientId, doctorId, onSaved }) {
       </div>
       <div className="grid gap-3 sm:grid-cols-[1fr_auto]">
         <div>
-          <label className="block text-xs font-medium text-slate-600" htmlFor="rem-date">Follow-up date *</label>
+          <label className="block text-2xs font-bold uppercase tracking-wider text-slate-500" htmlFor="rem-date">Follow-up date *</label>
           <input
             id="rem-date"
             type="date"
-            className="mt-1 w-full rounded-md border border-slate-300 px-3 py-2 text-sm focus:border-emerald-500 focus:outline-none"
+            className="mt-1.5 w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-2.5 text-sm text-slate-900 outline-none focus:border-emerald-500 focus:bg-white focus:ring-2 focus:ring-emerald-500/10 transition duration-200"
             value={form.followUpDate}
             onChange={(event) => setForm((current) => ({ ...current, followUpDate: event.target.value }))}
           />
         </div>
-        <div className="flex items-end gap-2 text-xs">
-          <button type="button" onClick={() => quickFill(7)} className="rounded-md border border-slate-300 px-2.5 py-1.5 font-medium hover:bg-slate-100">+7d</button>
-          <button type="button" onClick={() => quickFill(14)} className="rounded-md border border-slate-300 px-2.5 py-1.5 font-medium hover:bg-slate-100">+14d</button>
-          <button type="button" onClick={() => quickFill(30)} className="rounded-md border border-slate-300 px-2.5 py-1.5 font-medium hover:bg-slate-100">+30d</button>
+        <div className="flex items-end gap-2 text-2xs font-bold">
+          <button type="button" onClick={() => quickFill(7)} className="rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-slate-600 hover:bg-slate-50 hover:border-slate-350 cursor-pointer transition">+7d</button>
+          <button type="button" onClick={() => quickFill(14)} className="rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-slate-600 hover:bg-slate-50 hover:border-slate-350 cursor-pointer transition">+14d</button>
+          <button type="button" onClick={() => quickFill(30)} className="rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-slate-600 hover:bg-slate-50 hover:border-slate-350 cursor-pointer transition">+30d</button>
         </div>
       </div>
-      {error ? <p className="text-sm text-rose-700">{error}</p> : null}
+      {error ? <p className="text-xs font-semibold text-rose-600">{error}</p> : null}
       <button
         type="submit"
         disabled={isSaving}
-        className="rounded-md bg-slate-950 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-800 disabled:cursor-not-allowed disabled:bg-slate-300"
+        className="w-full rounded-xl bg-slate-900 px-5 py-3 text-xs font-bold text-white shadow-md hover:bg-slate-800 hover:shadow-lg active:scale-[0.98] transition-all duration-200 disabled:cursor-not-allowed disabled:bg-slate-200 cursor-pointer uppercase tracking-wider"
       >
-        {isSaving ? 'Saving...' : 'Add reminder'}
+        {isSaving ? 'Saving...' : 'Add Reminder'}
       </button>
     </form>
   )
@@ -294,82 +294,82 @@ function DoctorPatientDetailPage() {
     <PageShell
       eyebrow="Doctor"
       title={patient.name}
-      description={`Patient record · ${patient.id}`}
+      description={`Patient record · ID: ${patient.id}`}
     >
-      <div className="space-y-6">
-        <div className="flex flex-wrap items-center justify-between gap-3">
+      <div className="space-y-6 animate-fade-in">
+        <div className="flex flex-wrap items-center justify-between gap-3 bg-white/70 backdrop-blur-sm border border-slate-100 rounded-2xl p-4 shadow-premium-sm">
           <button
             type="button"
             onClick={() => navigate(-1)}
-            className="rounded-md border border-slate-300 px-3 py-1.5 text-sm font-medium hover:bg-slate-100"
+            className="rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-xs font-bold uppercase tracking-wider text-slate-700 hover:bg-slate-50 hover:border-slate-350 shadow-premium-sm transition cursor-pointer"
           >
-            ← Back to dashboard
+            ← Back to Dashboard
           </button>
           <Link
             to={`/doctor/${doctorId || 'dr-priya-sharma'}/dashboard`}
-            className="text-sm font-medium text-emerald-700 hover:underline"
+            className="text-xs font-bold uppercase tracking-wider text-emerald-700 hover:text-emerald-800 transition mr-2"
           >
-            Return to queue
+            Return to Queue
           </Link>
         </div>
 
         {/* Demographics */}
-        <section className="rounded-lg border border-slate-200 bg-white p-5 shadow-sm">
-          <h2 className="mb-4 text-lg font-semibold">Patient profile</h2>
+        <section className="rounded-2xl border border-slate-100 bg-white/80 backdrop-blur-sm p-6 shadow-premium-md">
+          <h2 className="mb-4 text-xs font-bold uppercase tracking-wider text-slate-500">Patient Profile</h2>
           <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
-            <div>
-              <p className="text-xs uppercase tracking-wide text-slate-500">Age</p>
-              <p className="font-medium">{patient.age ?? '-'}</p>
+            <div className="bg-slate-50/50 border border-slate-100/40 rounded-xl p-3.5">
+              <p className="text-2xs font-bold uppercase tracking-wider text-slate-400">Age</p>
+              <p className="font-bold text-slate-800 font-mono mt-0.5">{patient.age ?? '-'}</p>
             </div>
-            <div>
-              <p className="text-xs uppercase tracking-wide text-slate-500">Gender</p>
-              <p className="font-medium">{patient.gender ?? '-'}</p>
+            <div className="bg-slate-50/50 border border-slate-100/40 rounded-xl p-3.5">
+              <p className="text-2xs font-bold uppercase tracking-wider text-slate-400">Gender</p>
+              <p className="font-bold text-slate-800 mt-0.5">{patient.gender ?? '-'}</p>
             </div>
-            <div>
-              <p className="text-xs uppercase tracking-wide text-slate-500">Blood group</p>
-              <p className="font-medium">{patient.bloodGroup ?? '-'}</p>
+            <div className="bg-slate-50/50 border border-slate-100/40 rounded-xl p-3.5">
+              <p className="text-2xs font-bold uppercase tracking-wider text-slate-400">Blood group</p>
+              <p className="font-bold text-slate-800 font-mono mt-0.5">{patient.bloodGroup ?? '-'}</p>
             </div>
-            <div>
-              <p className="text-xs uppercase tracking-wide text-slate-500">Phone</p>
-              <p className="font-medium">{patient.phone ?? '-'}</p>
+            <div className="bg-slate-50/50 border border-slate-100/40 rounded-xl p-3.5">
+              <p className="text-2xs font-bold uppercase tracking-wider text-slate-400">Phone</p>
+              <p className="font-bold text-slate-800 font-mono mt-0.5">{patient.phone ?? '-'}</p>
             </div>
-            <div>
-              <p className="text-xs uppercase tracking-wide text-slate-500">Address</p>
-              <p className="font-medium">{patient.address ?? '-'}</p>
+            <div className="bg-slate-50/50 border border-slate-100/40 rounded-xl p-3.5">
+              <p className="text-2xs font-bold uppercase tracking-wider text-slate-400">Address</p>
+              <p className="font-bold text-slate-800 mt-0.5 truncate" title={patient.address}>{patient.address ?? '-'}</p>
             </div>
-            <div>
-              <p className="text-xs uppercase tracking-wide text-slate-500">Total visits</p>
-              <p className="font-medium">{consultations.length}</p>
+            <div className="bg-slate-50/50 border border-slate-100/40 rounded-xl p-3.5">
+              <p className="text-2xs font-bold uppercase tracking-wider text-slate-400">Total visits</p>
+              <p className="font-bold text-slate-800 font-mono mt-0.5">{consultations.length}</p>
             </div>
           </div>
         </section>
 
         <div className="grid gap-6 lg:grid-cols-[1.4fr_1fr]">
           {/* Left column: reports + past consultations */}
-          <div className="space-y-5">
-            <section className="rounded-lg border border-slate-200 bg-white p-5 shadow-sm">
-              <div className="mb-3 flex items-center justify-between">
-                <h2 className="text-lg font-semibold">Reports &amp; scans</h2>
-                <span className="rounded-full bg-slate-100 px-2.5 py-0.5 text-xs font-semibold text-slate-600">
+          <div className="space-y-6">
+            <section className="rounded-2xl border border-slate-100 bg-white/80 backdrop-blur-sm p-6 shadow-premium-md">
+              <div className="mb-4 flex items-center justify-between">
+                <h2 className="text-xs font-bold uppercase tracking-wider text-slate-500">Reports &amp; Scans</h2>
+                <span className="rounded-xl bg-slate-100 px-3 py-1 text-2xs font-bold text-slate-600 font-mono">
                   {reports.length}
                 </span>
               </div>
               {reports.length === 0 ? (
-                <p className="text-sm text-slate-500">No reports uploaded yet for this patient.</p>
+                <p className="text-xs text-slate-500 font-medium">No reports uploaded yet for this patient.</p>
               ) : (
                 <ul className="space-y-3">
                   {reports.map((report) => (
-                    <li key={report.id} className="rounded-md border border-slate-200 p-4">
-                      <div className="flex flex-wrap items-start justify-between gap-2">
+                    <li key={report.id} className="rounded-xl border border-slate-150 p-4 hover:bg-slate-50/10 transition">
+                      <div className="flex flex-wrap items-center justify-between gap-3">
                         <div>
-                          <p className="font-semibold">{report.title}</p>
-                          <p className="text-xs text-slate-500">
+                          <p className="text-sm font-bold text-slate-900">{report.title}</p>
+                          <p className="text-xs text-slate-400 font-medium mt-0.5">
                             {report.type} · {formatDate(report.date)}
                           </p>
                         </div>
                         <a
                           href={report.url || '#'}
-                          className="rounded-md border border-slate-300 px-2.5 py-1 text-xs font-semibold text-slate-700 hover:bg-slate-100"
+                          className="rounded-xl border border-slate-200 bg-white px-3 py-1.5 text-xs font-bold text-slate-700 hover:bg-slate-50 hover:border-slate-350 cursor-pointer shadow-premium-sm transition"
                           onClick={(event) => {
                             if (!report.url || report.url === '#') event.preventDefault()
                           }}
@@ -378,7 +378,7 @@ function DoctorPatientDetailPage() {
                         </a>
                       </div>
                       {report.notes ? (
-                        <p className="mt-2 text-sm text-slate-600">{report.notes}</p>
+                        <p className="mt-2 text-xs text-slate-550 leading-relaxed font-medium">{report.notes}</p>
                       ) : null}
                     </li>
                   ))}
@@ -386,40 +386,40 @@ function DoctorPatientDetailPage() {
               )}
             </section>
 
-            <section className="rounded-lg border border-slate-200 bg-white p-5 shadow-sm">
-              <div className="mb-3 flex items-center justify-between">
-                <h2 className="text-lg font-semibold">Past consultations</h2>
-                <span className="rounded-full bg-slate-100 px-2.5 py-0.5 text-xs font-semibold text-slate-600">
+            <section className="rounded-2xl border border-slate-100 bg-white/80 backdrop-blur-sm p-6 shadow-premium-md">
+              <div className="mb-4 flex items-center justify-between">
+                <h2 className="text-xs font-bold uppercase tracking-wider text-slate-500">Past Consultations</h2>
+                <span className="rounded-xl bg-slate-100 px-3 py-1 text-2xs font-bold text-slate-600 font-mono">
                   {consultations.length}
                 </span>
               </div>
               {consultations.length === 0 ? (
-                <p className="text-sm text-slate-500">No past consultations recorded.</p>
+                <p className="text-xs text-slate-500 font-medium">No past consultations recorded.</p>
               ) : (
-                <ol className="relative space-y-4 border-l border-slate-200 pl-4">
+                <ol className="relative space-y-4 border-l border-slate-200/80 pl-4 ml-1">
                   {consultations.map((cons) => (
                     <li key={cons.id} className="relative">
-                      <span className="absolute -left-[1.15rem] top-1.5 h-2.5 w-2.5 rounded-full bg-emerald-600" />
-                      <div className="rounded-md border border-slate-200 p-4">
-                        <div className="flex flex-wrap items-start justify-between gap-2">
+                      <span className="absolute -left-[1.28rem] top-2 h-2.5 w-2.5 rounded-full border-2 border-white bg-emerald-600 shadow-premium-sm" />
+                      <div className="rounded-xl border border-slate-150 p-4 hover:bg-slate-50/10 transition">
+                        <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-100 pb-2">
                           <div>
-                            <p className="font-semibold">{cons.diagnosis}</p>
-                            <p className="text-xs text-slate-500">
+                            <p className="text-sm font-bold text-slate-900">{cons.diagnosis}</p>
+                            <p className="text-xs text-slate-400 font-medium mt-0.5">
                               {formatDate(cons.date)} · {cons.reason || 'No reason recorded'}
                             </p>
                           </div>
-                          <span className="rounded-full bg-emerald-50 px-2 py-0.5 text-xs font-semibold uppercase text-emerald-700">
+                          <span className="rounded-lg bg-emerald-50 px-2 py-0.5 text-2xs font-bold uppercase tracking-wider text-emerald-700">
                             {cons.status}
                           </span>
                         </div>
                         {cons.prescription ? (
-                          <p className="mt-2 text-sm">
-                            <span className="font-medium text-slate-700">Rx:</span>{' '}
+                          <p className="mt-2 text-xs text-slate-700">
+                            <span className="font-bold text-slate-900">Rx:</span>{' '}
                             {cons.prescription}
                           </p>
                         ) : null}
                         {cons.notes ? (
-                          <p className="mt-1 text-sm text-slate-600">{cons.notes}</p>
+                          <p className="mt-1.5 text-xs text-slate-550 leading-relaxed font-medium">{cons.notes}</p>
                         ) : null}
                       </div>
                     </li>
@@ -430,9 +430,9 @@ function DoctorPatientDetailPage() {
           </div>
 
           {/* Right column: add remark + reminders */}
-          <div className="space-y-5">
-            <section className="rounded-lg border border-slate-200 bg-white p-5 shadow-sm">
-              <h2 className="mb-3 text-lg font-semibold">Add consultation remark</h2>
+          <div className="space-y-6">
+            <section className="rounded-2xl border border-slate-100 bg-white/80 backdrop-blur-sm p-6 shadow-premium-md">
+              <h2 className="mb-4 text-xs font-bold uppercase tracking-wider text-slate-500">Add Consultation Remark</h2>
               <ConsultationForm
                 patientId={patient.id}
                 doctorId={doctorId}
@@ -440,32 +440,32 @@ function DoctorPatientDetailPage() {
               />
             </section>
 
-            <section className="rounded-lg border border-amber-300 bg-amber-50 p-5 shadow-sm">
-              <h2 className="mb-3 text-lg font-semibold text-amber-900">Reminders</h2>
+            <section className="rounded-2xl border border-amber-100 bg-amber-50/20 p-6 shadow-premium-md">
+              <h2 className="mb-4 text-xs font-bold uppercase tracking-wider text-amber-800">Active Reminders</h2>
               {reminders.length === 0 ? (
-                <p className="mb-4 text-sm text-amber-700">No pending follow-up reminders.</p>
+                <p className="mb-4 text-xs text-amber-700 font-semibold">No pending follow-up reminders.</p>
               ) : (
                 <ul className="mb-4 space-y-3">
                   {reminders.map((rem) => (
                     <li
                       key={rem.id}
-                      className={`rounded-md border p-3 ${
+                      className={`rounded-xl border p-4 shadow-premium-sm transition ${
                         rem.status === 'completed'
-                          ? 'border-slate-200 bg-white opacity-75'
-                          : 'border-amber-200 bg-white'
+                          ? 'border-slate-200 bg-white/60 opacity-60'
+                          : 'border-amber-150 bg-white hover:border-amber-250'
                       }`}
                     >
-                      <div className="flex flex-wrap items-start justify-between gap-2">
-                        <p className="text-sm font-medium text-slate-800">{rem.message}</p>
+                      <div className="flex flex-wrap items-start justify-between gap-3">
+                        <p className="text-xs font-bold text-slate-800 leading-relaxed">{rem.message}</p>
                         {rem.status === 'pending' ? (
                           <RemindersDueTag dateString={rem.followUpDate} />
                         ) : (
-                          <span className="rounded-full bg-emerald-100 px-2 py-0.5 text-xs font-semibold text-emerald-700">Done</span>
+                          <span className="rounded-xl bg-emerald-100 px-2 py-0.5 text-2xs font-bold uppercase tracking-wider text-emerald-700">Done</span>
                         )}
                       </div>
-                      <div className="mt-2 flex items-center justify-between gap-2">
-                        <p className="text-xs text-slate-500">
-                          Follow-up: {formatDate(rem.followUpDate)}
+                      <div className="mt-3 flex items-center justify-between gap-3 border-t border-slate-100/50 pt-2.5">
+                        <p className="text-2xs font-bold uppercase tracking-wider text-slate-400">
+                          Follow-up: <span className="font-semibold text-slate-600">{formatDate(rem.followUpDate)}</span>
                         </p>
                         {rem.status === 'pending' ? (
                           <button
@@ -478,9 +478,9 @@ function DoctorPatientDetailPage() {
                                 setError(completeError.response?.data?.message || completeError.message)
                               }
                             }}
-                            className="rounded-md border border-emerald-600 px-2.5 py-1 text-xs font-semibold text-emerald-700 hover:bg-emerald-100"
+                            className="rounded-xl border border-emerald-600 bg-white px-3 py-1.5 text-2xs font-bold uppercase tracking-wider text-emerald-700 hover:bg-emerald-50/50 cursor-pointer transition duration-200"
                           >
-                            Mark done
+                            Mark Done
                           </button>
                         ) : null}
                       </div>
@@ -488,7 +488,7 @@ function DoctorPatientDetailPage() {
                   ))}
                 </ul>
               )}
-              <div className="mt-2 border-t border-amber-200 pt-4">
+              <div className="mt-2 border-t border-amber-200/50 pt-5">
                 <ReminderForm patientId={patient.id} doctorId={doctorId} onSaved={load} />
               </div>
             </section>

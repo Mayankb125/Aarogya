@@ -163,23 +163,23 @@ function ReceptionistPage() {
         description="Receptionist controls are protected by a simple Phase 1 PIN."
       >
         <form
-          className="max-w-sm rounded-lg border border-slate-200 bg-white p-5 shadow-sm"
+          className="max-w-sm rounded-2xl border border-slate-100 bg-white/80 backdrop-blur-md p-6 shadow-premium-lg animate-slide-up"
           onSubmit={unlockReceptionist}
         >
-          <label className="block text-sm font-medium text-slate-700" htmlFor="pin">
+          <label className="block text-xs font-bold uppercase tracking-wider text-slate-500" htmlFor="pin">
             Staff PIN
           </label>
           <input
-            className="mt-2 w-full rounded-md border border-slate-300 px-3 py-2 outline-none focus:border-emerald-500"
+            className="mt-2 w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-2.5 text-sm text-slate-900 outline-none focus:border-emerald-500 focus:bg-white focus:ring-2 focus:ring-emerald-500/10 transition duration-200"
             id="pin"
             inputMode="numeric"
             onChange={(event) => setPin(event.target.value)}
             type="password"
             value={pin}
           />
-          {pinError ? <p className="mt-2 text-sm text-rose-700">{pinError}</p> : null}
+          {pinError ? <p className="mt-2 text-xs font-semibold text-rose-600">{pinError}</p> : null}
           <button
-            className="mt-4 w-full rounded-md bg-emerald-700 px-4 py-2 font-semibold text-white hover:bg-emerald-800"
+            className="mt-4 w-full rounded-xl bg-emerald-600 px-5 py-3 font-bold text-white shadow-lg shadow-emerald-600/10 hover:bg-emerald-700 active:scale-[0.97] transition-all duration-200 cursor-pointer text-sm"
             type="submit"
           >
             Open Dashboard
@@ -195,20 +195,20 @@ function ReceptionistPage() {
       title="Queue control dashboard"
       description="Add patients, adjust consultation time, call the next token, and reset the queue."
     >
-      <div className="grid gap-5 lg:grid-cols-[360px_1fr]">
-        <section className="rounded-lg border border-slate-200 bg-white p-5 shadow-sm">
+      <div className="grid gap-6 lg:grid-cols-[360px_1fr]">
+        <section className="rounded-2xl border border-slate-100 bg-white/80 backdrop-blur-sm p-6 shadow-premium-md h-fit">
           <div className="mb-4 flex items-center justify-between">
-            <h2 className="text-lg font-semibold">New patient</h2>
+            <h2 className="text-md font-bold text-slate-900">New Patient</h2>
             <StatusBadge isConnected={isConnected} />
           </div>
 
           <form className="space-y-4" onSubmit={submitPatient}>
             <div>
-              <label className="block text-sm font-medium text-slate-700" htmlFor="name">
-                Patient name
+              <label className="block text-xs font-bold uppercase tracking-wider text-slate-500" htmlFor="name">
+                Patient Name
               </label>
               <input
-                className="mt-1 w-full rounded-md border border-slate-300 px-3 py-2 outline-none focus:border-emerald-500"
+                className="mt-1.5 w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 outline-none focus:border-emerald-500 focus:bg-white focus:ring-2 focus:ring-emerald-500/10 transition duration-200"
                 id="name"
                 onChange={(event) =>
                   setForm((currentForm) => ({
@@ -220,19 +220,19 @@ function ReceptionistPage() {
                 value={form.name}
               />
               {!form.name.trim() ? (
-                <p className="mt-1 text-xs text-slate-500">Name is required.</p>
+                <p className="mt-1 text-2xs font-semibold text-slate-400">Name is required.</p>
               ) : null}
               {formError ? (
-                <p className="mt-1 text-sm text-rose-700">{formError}</p>
+                <p className="mt-1.5 text-xs font-semibold text-rose-600">{formError}</p>
               ) : null}
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-slate-700" htmlFor="reason">
-                Visit reason
+              <label className="block text-xs font-bold uppercase tracking-wider text-slate-500" htmlFor="reason">
+                Visit Reason
               </label>
               <input
-                className="mt-1 w-full rounded-md border border-slate-300 px-3 py-2 outline-none focus:border-emerald-500"
+                className="mt-1.5 w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 outline-none focus:border-emerald-500 focus:bg-white focus:ring-2 focus:ring-emerald-500/10 transition duration-200"
                 id="reason"
                 onChange={(event) =>
                   setForm((currentForm) => ({
@@ -246,11 +246,11 @@ function ReceptionistPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-slate-700" htmlFor="doctor">
+              <label className="block text-xs font-bold uppercase tracking-wider text-slate-500" htmlFor="doctor">
                 Assign Doctor
               </label>
               <select
-                className="mt-1 w-full rounded-md border border-slate-300 px-3 py-2 outline-none focus:border-emerald-500 bg-white"
+                className="mt-1.5 w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-2.5 text-sm text-slate-900 outline-none focus:border-emerald-500 focus:bg-white focus:ring-2 focus:ring-emerald-500/10 transition duration-200 bg-white select-none cursor-pointer font-medium"
                 id="doctor"
                 onChange={(event) =>
                   setForm((currentForm) => ({
@@ -269,67 +269,67 @@ function ReceptionistPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-slate-700" htmlFor="avgTime">
-                Avg consultation time
+              <label className="block text-xs font-bold uppercase tracking-wider text-slate-500" htmlFor="avgTime">
+                Avg Consultation Time
               </label>
-              <div className="mt-1 flex items-center gap-2">
+              <div className="mt-1.5 flex items-center gap-3">
                 <input
-                  className="w-24 rounded-md border border-slate-300 px-3 py-2 outline-none focus:border-emerald-500"
+                  className="w-24 rounded-xl border border-slate-200 bg-slate-50 px-4 py-2.5 text-sm text-slate-900 outline-none focus:border-emerald-500 focus:bg-white focus:ring-2 focus:ring-emerald-500/10 transition duration-200"
                   id="avgTime"
                   min="1"
                   onChange={changeAvgConsultTime}
                   type="number"
                   value={avgConsultTime}
                 />
-                <span className="text-sm text-slate-600">minutes</span>
+                <span className="text-xs font-bold uppercase tracking-wider text-slate-500">minutes</span>
               </div>
             </div>
 
             <button
-              className="w-full rounded-md bg-emerald-700 px-4 py-2 font-semibold text-white hover:bg-emerald-800 disabled:cursor-not-allowed disabled:bg-slate-300"
+              className="w-full rounded-xl bg-emerald-600 px-5 py-3.5 font-bold text-white shadow-lg shadow-emerald-600/10 hover:bg-emerald-700 hover:shadow-emerald-700/20 active:scale-[0.98] transition-all duration-200 disabled:cursor-not-allowed disabled:bg-slate-200 disabled:text-slate-400 disabled:shadow-none"
               disabled={!isConnected || isSaving || !form.name.trim()}
               type="submit"
             >
-              Add Patient
+              Add Patient to Queue
             </button>
           </form>
         </section>
 
-        <section className="space-y-5">
+        <section className="space-y-6">
           {error ? (
-            <div className="rounded-lg border border-rose-200 bg-rose-50 p-4 text-sm text-rose-800">
+            <div className="rounded-xl border border-rose-150 bg-rose-50/70 p-4 text-xs font-semibold leading-relaxed text-rose-700">
               {error}
             </div>
           ) : null}
 
-          <div className="grid gap-4 md:grid-cols-3">
-            <div className="rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
-              <p className="text-sm text-slate-500">Current token</p>
-              <p className="mt-2 text-3xl font-bold">
+          <div className="grid gap-4 sm:grid-cols-3">
+            <div className="rounded-2xl border border-slate-100 bg-white/80 backdrop-blur-sm p-5 shadow-premium-sm">
+              <p className="text-2xs font-bold uppercase tracking-widest text-slate-400">Current Token</p>
+              <p className="mt-2 text-3xl font-extrabold tracking-tight text-slate-900 font-mono">
                 {currentToken ? `#${currentToken.tokenNumber}` : '-'}
               </p>
             </div>
-            <div className="rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
-              <p className="text-sm text-slate-500">Waiting</p>
-              <p className="mt-2 text-3xl font-bold">{queue.length}</p>
+            <div className="rounded-2xl border border-slate-100 bg-white/80 backdrop-blur-sm p-5 shadow-premium-sm">
+              <p className="text-2xs font-bold uppercase tracking-widest text-slate-400">Waiting</p>
+              <p className="mt-2 text-3xl font-extrabold tracking-tight text-slate-900 font-mono">{queue.length}</p>
             </div>
-            <div className="rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
-              <p className="text-sm text-slate-500">Average time</p>
-              <p className="mt-2 text-3xl font-bold">{avgConsultTime}m</p>
+            <div className="rounded-2xl border border-slate-100 bg-white/80 backdrop-blur-sm p-5 shadow-premium-sm">
+              <p className="text-2xs font-bold uppercase tracking-widest text-slate-400">Average Time</p>
+              <p className="mt-2 text-3xl font-extrabold tracking-tight text-slate-900 font-mono">{avgConsultTime}m</p>
             </div>
           </div>
 
           <div className="flex flex-wrap gap-3">
             <button
-              className="rounded-md bg-slate-950 px-4 py-2 font-semibold text-white hover:bg-slate-800 disabled:cursor-not-allowed disabled:bg-slate-300"
+              className="rounded-xl bg-emerald-600 px-6 py-3 font-bold text-white shadow-lg shadow-emerald-600/10 hover:bg-emerald-700 hover:shadow-emerald-700/20 active:scale-[0.98] transition-all duration-200 disabled:cursor-not-allowed disabled:bg-slate-200 disabled:text-slate-400 disabled:shadow-none cursor-pointer"
               disabled={!isConnected || isSaving || queue.length === 0}
               onClick={() => actions.callNext()}
               type="button"
             >
-              Call Next
+              Call Next Patient
             </button>
             <button
-              className="rounded-md border border-rose-300 px-4 py-2 font-semibold text-rose-700 hover:bg-rose-50 disabled:cursor-not-allowed disabled:border-slate-200 disabled:text-slate-400"
+              className="rounded-xl border border-rose-200 bg-white px-6 py-3 font-bold text-rose-600 hover:bg-rose-50/50 hover:border-rose-300 active:scale-[0.98] transition-all duration-200 disabled:cursor-not-allowed disabled:border-slate-200 disabled:text-slate-400 cursor-pointer"
               disabled={!isConnected || isSaving}
               onClick={() => actions.resetQueue()}
               type="button"
@@ -338,13 +338,13 @@ function ReceptionistPage() {
             </button>
           </div>
 
-          <div className="overflow-hidden rounded-lg border border-amber-300 bg-amber-50 shadow-sm">
-            <div className="flex items-center justify-between border-b border-amber-200 px-4 py-3">
-              <h2 className="font-semibold text-amber-900">
-                Pending bookings ({pendingBookings.length})
+          <div className="overflow-hidden rounded-2xl border border-amber-100 bg-amber-50/20 shadow-premium-sm">
+            <div className="flex items-center justify-between border-b border-amber-100/50 bg-amber-50/40 px-5 py-4">
+              <h2 className="text-xs font-bold uppercase tracking-wider text-amber-800">
+                Pending Bookings ({pendingBookings.length})
               </h2>
               <button
-                className="rounded-md border border-amber-300 px-3 py-1 text-xs font-semibold text-amber-800 hover:bg-amber-100"
+                className="rounded-xl border border-amber-200 bg-white px-3.5 py-1.5 text-2xs font-bold uppercase tracking-wider text-amber-700 hover:bg-amber-50/50 transition cursor-pointer"
                 onClick={loadPendingBookings}
                 type="button"
               >
@@ -352,32 +352,32 @@ function ReceptionistPage() {
               </button>
             </div>
             {bookingError ? (
-              <p className="p-4 text-sm text-rose-800">{bookingError}</p>
+              <p className="p-5 text-xs text-rose-700 font-semibold">{bookingError}</p>
             ) : pendingLoading ? (
-              <p className="p-4 text-slate-600">Loading pending bookings...</p>
+              <p className="p-5 text-xs text-slate-500 font-medium animate-pulse">Loading pending bookings...</p>
             ) : pendingBookings.length === 0 ? (
-              <p className="p-4 text-slate-600">No pending bookings waiting for confirmation.</p>
+              <p className="p-5 text-xs text-slate-500 font-medium">No pending bookings waiting for check-in.</p>
             ) : (
-              <div className="divide-y divide-amber-100">
+              <div className="divide-y divide-amber-100/60 bg-white/60">
                 {pendingBookings.map((booking) => (
-                  <div className="p-4" key={booking.id}>
-                    <div className="flex flex-wrap items-start justify-between gap-3">
+                  <div className="p-5 hover:bg-amber-50/10 transition" key={booking.id}>
+                    <div className="flex flex-wrap items-center justify-between gap-4">
                       <div>
-                        <p className="font-semibold">{booking.patientName}</p>
-                        <p className="text-sm text-slate-600">
+                        <p className="text-sm font-bold text-slate-900">{booking.patientName}</p>
+                        <p className="text-xs text-slate-500 font-medium mt-0.5">
                           {booking.doctor?.name || booking.doctorId} · {booking.date} {booking.time}
                         </p>
-                        <p className="mt-1 text-xs text-slate-500">
-                          Booking ID: {booking.id}
+                        <p className="mt-1 text-[10px] text-slate-400 font-mono">
+                          ID: {booking.id}
                         </p>
                       </div>
                       <button
-                        className="rounded-md bg-emerald-700 px-4 py-2 text-sm font-semibold text-white hover:bg-emerald-800 disabled:cursor-not-allowed disabled:bg-slate-300"
+                        className="rounded-xl bg-emerald-600 px-4 py-2 text-xs font-bold text-white shadow-md shadow-emerald-600/10 hover:bg-emerald-700 hover:shadow-emerald-700/20 active:scale-95 transition-all duration-200 disabled:cursor-not-allowed disabled:bg-slate-200 cursor-pointer"
                         disabled={confirmingId === booking.id}
                         onClick={() => handleConfirmBooking(booking.id)}
                         type="button"
                       >
-                        {confirmingId === booking.id ? 'Confirming...' : 'Confirm & queue'}
+                        {confirmingId === booking.id ? 'Confirming...' : 'Check-In & Queue'}
                       </button>
                     </div>
                   </div>
@@ -386,31 +386,31 @@ function ReceptionistPage() {
             )}
           </div>
 
-          <div className="overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm">
-            <div className="border-b border-slate-200 px-4 py-3">
-              <h2 className="font-semibold">Waiting patients</h2>
+          <div className="overflow-hidden rounded-2xl border border-slate-100 bg-white/80 backdrop-blur-sm shadow-premium-md">
+            <div className="border-b border-slate-100 px-5 py-4">
+              <h2 className="text-xs font-bold uppercase tracking-wider text-slate-500">Waiting Patients</h2>
             </div>
             {isLoading ? (
-              <p className="p-4 text-slate-600">Loading queue...</p>
+              <p className="p-5 text-xs text-slate-500 font-medium animate-pulse">Loading queue...</p>
             ) : queue.length === 0 ? (
-              <p className="p-4 text-slate-600">Queue is empty.</p>
+              <p className="p-5 text-xs text-slate-500 font-medium">Queue is currently empty.</p>
             ) : (
-              <div className="divide-y divide-slate-100">
+              <div className="divide-y divide-slate-100/50">
                 {queue.map((patient) => (
                   <div
-                    className="grid gap-3 p-4 md:grid-cols-[90px_1fr_120px_120px]"
+                    className="grid gap-4 p-5 hover:bg-slate-50/20 transition items-center grid-cols-[60px_1fr_100px_100px]"
                     key={patient.id}
                   >
-                    <strong>#{patient.tokenNumber}</strong>
+                    <strong className="text-sm font-extrabold text-slate-900 font-mono">#{patient.tokenNumber}</strong>
                     <div>
-                      <p className="font-medium">{patient.name}</p>
-                      <p className="text-sm text-slate-500">{patient.reason}</p>
+                      <p className="text-sm font-bold text-slate-900">{patient.name}</p>
+                      <p className="text-xs text-slate-500 mt-0.5">{patient.reason}</p>
                     </div>
-                    <p className="text-sm text-slate-600">
+                    <p className="text-xs font-semibold text-slate-400">
                       {patient.tokensAhead} ahead
                     </p>
-                    <p className="text-sm font-semibold text-emerald-700">
-                      {patient.waitTime} min
+                    <p className="text-xs font-bold text-emerald-600 font-mono text-right">
+                      +{patient.waitTime} mins
                     </p>
                   </div>
                 ))}

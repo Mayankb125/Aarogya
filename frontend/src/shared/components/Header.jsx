@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Link, useNavigate, useSearchParams, useLocation } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
+import logoImage from '../../assets/Aarogya.png'
 
 const NAV_LINKS = [
   { to: '/search', label: 'Find Doctor' },
@@ -48,14 +49,15 @@ function HeaderSearchBar() {
 }
 
 function UserMenu() {
-  const { user } = useAuth()
+  const { user, signOut } = useAuth()
   const location = useLocation()
+  const navigate = useNavigate()
 
   if (!user) {
     const redirectParam = encodeURIComponent(location.pathname + location.search)
     return (
       <Link
-        className="rounded-md bg-emerald-700 px-3.5 py-1.5 text-xs font-semibold text-white hover:bg-emerald-800"
+        className="rounded-xl bg-emerald-600 px-4 py-2 text-xs font-bold text-white shadow-md shadow-emerald-600/10 hover:bg-emerald-700 transition"
         to={`/login?redirect=${redirectParam}`}
       >
         Sign in
@@ -81,11 +83,20 @@ function UserMenu() {
       ? '/admin/onboarding'
       : '/patient/profile'
 
+  async function handleLogout() {
+    try {
+      await signOut()
+      navigate('/', { replace: true })
+    } catch (err) {
+      console.error("Failed to sign out:", err)
+    }
+  }
+
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex items-center gap-2.5 animate-fade-in">
       <Link
         to={profilePath}
-        className="flex items-center gap-2 rounded-full border border-slate-200 px-2.5 py-1 text-xs font-semibold text-slate-700 hover:border-emerald-400 hover:bg-emerald-50"
+        className="flex items-center gap-2 rounded-full border border-slate-200 px-2.5 py-1 text-xs font-semibold text-slate-700 hover:border-emerald-400 hover:bg-emerald-50 transition"
         title="Open my profile"
       >
         <span className="hidden sm:inline">{displayName}</span>
@@ -93,42 +104,54 @@ function UserMenu() {
           {initial}
         </span>
       </Link>
+      <button
+        onClick={handleLogout}
+        className="rounded-xl border border-slate-200 bg-white px-3 py-1.5 text-2xs font-bold uppercase tracking-wider text-slate-500 hover:text-rose-600 hover:border-rose-200 hover:bg-rose-50/30 cursor-pointer transition duration-200 active:scale-95"
+        type="button"
+      >
+        Sign out
+      </button>
     </div>
   )
 }
 
 function Header({ variant = 'default' }) {
-  // 'landing' variant renders over the dark hero, so it uses light text + transparent bg.
-  const isLanding = variant === 'landing'
+  const location = useLocation()
+  const isLanding = location.pathname === '/'
+  const isSearch = location.pathname === '/search'
 
-  const linkBase = isLanding
-    ? 'text-slate-700 hover:text-emerald-700'
-    : 'text-slate-600 hover:text-emerald-700'
-  const brandClass = isLanding
-    ? 'text-lg font-bold text-emerald-700'
-    : 'text-lg font-bold text-emerald-700'
+  const brandClass = 'text-lg font-black tracking-tight text-slate-900 flex items-center gap-1 shrink-0'
+  
+  const isLandingVariant = variant === 'landing' || (variant === 'default' && isLanding)
 
   return (
-    <header
-      className={
-        isLanding
-          ? 'sticky top-0 z-20 border-b border-slate-200 bg-white/95 backdrop-blur'
-          : 'border-b border-slate-200 bg-white'
-      }
-    >
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 gap-4">
+    <header className="sticky top-0 z-35 border-b border-slate-150/50 bg-white/80 backdrop-blur-md shadow-premium-sm">
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 gap-4">
         <Link to="/" className={brandClass} aria-label="Aarogya home">
-          Aarogya
+          <img src={logoImage} alt="Aarogya Logo" className="h-6 w-auto object-contain shrink-0" />
+          <span>Aarogya</span>
+          <span className="text-emerald-500 font-extrabold text-xl -ml-1">.</span>
         </Link>
         
         <HeaderSearchBar />
 
-        <nav className="flex items-center gap-3 text-sm font-medium">
-          {NAV_LINKS.map((link) => (
-            <Link key={link.to} to={link.to} className={`hidden md:inline ${linkBase}`}>
-              {link.label}
-            </Link>
-          ))}
+        <nav className="flex items-center gap-4 text-xs font-semibold uppercase tracking-wider text-slate-500">
+          {NAV_LINKS.map((link) => {
+            const isActive = location.pathname.startsWith(link.to) && link.to !== '/' || (link.to === '/' && location.pathname === '/')
+            return (
+              <Link
+                key={link.to}
+                to={link.to}
+                className={`hidden md:inline transition duration-200 ${
+                  isActive
+                    ? 'text-emerald-700 font-bold border-b-2 border-emerald-500 pb-1.5 -mb-[18px]'
+                    : 'hover:text-slate-900 hover:scale-[1.02]'
+                }`}
+              >
+                {link.label}
+              </Link>
+            )
+          })}
           <span className="mx-1 hidden h-4 w-px bg-slate-200 md:inline-block" />
           <UserMenu />
         </nav>

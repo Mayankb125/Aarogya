@@ -7,7 +7,7 @@ import { getDoctorDashboard } from '../shared/services/doctorService'
 function PatientHistoryPanel({ history }) {
   if (!history) {
     return (
-      <p className="mt-3 text-sm text-slate-500">
+      <p className="mt-3 text-xs font-semibold text-slate-400">
         Walk-in patient — no stored profile, reports, or past consultations on file.
       </p>
     )
@@ -16,30 +16,30 @@ function PatientHistoryPanel({ history }) {
   const lastVisit = history.medicalHistory && history.medicalHistory[0]
 
   return (
-    <div className="mt-3 space-y-3 rounded-md border border-slate-200 bg-slate-50 p-4 text-sm">
-      <div className="grid gap-2 sm:grid-cols-3">
+    <div className="mt-4 space-y-4 rounded-xl border border-slate-100 bg-slate-50/50 p-5 text-xs">
+      <div className="grid gap-3 grid-cols-3">
         <div>
-          <p className="text-xs uppercase tracking-wide text-slate-500">Age</p>
-          <p className="font-medium">{history.age ?? '-'}</p>
+          <p className="text-2xs font-bold uppercase tracking-wider text-slate-400">Age</p>
+          <p className="font-bold text-slate-800 font-mono mt-0.5">{history.age ?? '-'}</p>
         </div>
         <div>
-          <p className="text-xs uppercase tracking-wide text-slate-500">Blood group</p>
-          <p className="font-medium">{history.bloodGroup ?? '-'}</p>
+          <p className="text-2xs font-bold uppercase tracking-wider text-slate-400">Blood group</p>
+          <p className="font-bold text-slate-800 font-mono mt-0.5">{history.bloodGroup ?? '-'}</p>
         </div>
         <div>
-          <p className="text-xs uppercase tracking-wide text-slate-500">Phone</p>
-          <p className="font-medium">{history.phone ?? '-'}</p>
+          <p className="text-2xs font-bold uppercase tracking-wider text-slate-400">Phone</p>
+          <p className="font-bold text-slate-800 font-mono mt-0.5">{history.phone ?? '-'}</p>
         </div>
       </div>
 
-      <div>
-        <p className="text-xs uppercase tracking-wide text-slate-500">Last visit</p>
+      <div className="border-t border-slate-100/70 pt-3">
+        <p className="text-2xs font-bold uppercase tracking-wider text-slate-400">Last visit</p>
         {lastVisit ? (
-          <p className="mt-1 font-medium">
+          <p className="mt-1 font-semibold text-slate-700">
             {lastVisit.date} — {lastVisit.diagnosis}
           </p>
         ) : (
-          <p className="mt-1 text-slate-500">No past consultations recorded.</p>
+          <p className="mt-1 text-slate-400 font-medium">No past consultations recorded.</p>
         )}
       </div>
     </div>
@@ -55,20 +55,20 @@ function PatientCard({ patient, index, doctorId }) {
   const hasStoredProfile = Boolean(history?.patientId)
 
   return (
-    <div className="rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
-      <div className="flex flex-wrap items-start justify-between gap-3">
+    <div className="rounded-2xl border border-slate-150/40 bg-white/90 p-5 shadow-premium-sm hover:shadow-premium-md transition-all duration-300">
+      <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
-          <p className="text-xs uppercase tracking-wide text-slate-500">
+          <p className="text-2xs font-bold uppercase tracking-wider text-emerald-600">
             {index === 0 ? 'Now serving' : `Up next #${index + 1}`}
           </p>
-          <p className="text-lg font-semibold">
+          <p className="text-md font-extrabold text-slate-900 mt-0.5">
             #{patient.tokenNumber} · {patient.name}
           </p>
-          <p className="text-sm text-slate-600">{patient.reason || 'No reason given'}</p>
+          <p className="text-xs font-semibold text-slate-500 mt-0.5">{patient.reason || 'No reason given'}</p>
         </div>
         <div className="flex flex-wrap gap-2">
           <button
-            className="rounded-md border border-slate-300 px-3 py-1 text-xs font-semibold text-slate-700 hover:bg-slate-100"
+            className="rounded-xl border border-slate-200 bg-slate-50 px-3.5 py-2 text-xs font-bold text-slate-700 hover:bg-slate-100 transition cursor-pointer"
             onClick={() => setExpanded((value) => !value)}
             type="button"
           >
@@ -77,9 +77,9 @@ function PatientCard({ patient, index, doctorId }) {
           {hasStoredProfile ? (
             <Link
               to={`/doctor/${doctorId}/patient/${history.patientId}`}
-              className="rounded-md bg-emerald-700 px-3 py-1 text-xs font-semibold text-white hover:bg-emerald-800"
+              className="rounded-xl bg-emerald-600 px-3.5 py-2 text-xs font-bold text-white shadow-md shadow-emerald-600/10 hover:bg-emerald-700 transition cursor-pointer"
             >
-              Open full record
+              Open Patient Record
             </Link>
           ) : null}
         </div>
@@ -91,14 +91,14 @@ function PatientCard({ patient, index, doctorId }) {
 
 function SummaryCard({ label, value, tone }) {
   const toneClasses = {
-    default: 'border-slate-200 bg-white',
-    emphasised: 'border-emerald-300 bg-emerald-50',
-    warning: 'border-amber-300 bg-amber-50',
+    default: 'border-slate-100 bg-white/80',
+    emphasised: 'border-emerald-250 bg-emerald-50/50 text-emerald-800 shadow-emerald-500/2',
+    warning: 'border-amber-200 bg-amber-50/40 text-amber-800',
   }
   return (
-    <div className={`rounded-lg border p-4 shadow-sm ${toneClasses[tone] || toneClasses.default}`}>
-      <p className="text-xs uppercase tracking-wide text-slate-500">{label}</p>
-      <p className="mt-2 text-2xl font-bold">{value}</p>
+    <div className={`rounded-2xl border p-4 shadow-premium-sm ${toneClasses[tone] || toneClasses.default}`}>
+      <p className="text-2xs font-bold uppercase tracking-widest text-slate-400">{label}</p>
+      <p className="mt-2 text-2xl font-extrabold tracking-tight font-mono">{value}</p>
     </div>
   )
 }
@@ -210,55 +210,57 @@ function DoctorDashboardPage() {
       title={doctor.name}
       description={`${doctor.specialty} · ${doctor.qualification || 'MBBS'} · ${doctor.hospital?.name || ''}`}
     >
-      <div className="space-y-5">
-        <div className="flex flex-wrap items-center gap-3">
+      <div className="space-y-6">
+        <div className="flex flex-wrap items-center gap-3 bg-white/70 backdrop-blur-sm border border-slate-100 rounded-2xl p-4 shadow-premium-sm">
           <span
-            className={`rounded-full px-3 py-1 text-sm font-semibold ${
+            className={`rounded-xl px-3.5 py-1.5 text-2xs font-bold uppercase tracking-wider ${
               isConnected
-                ? 'bg-emerald-100 text-emerald-800'
-                : 'bg-rose-100 text-rose-800'
+                ? 'bg-emerald-100 text-emerald-800 border border-emerald-200'
+                : 'bg-rose-100 text-rose-800 border border-rose-200 animate-pulse'
             }`}
           >
-            {isConnected ? 'Live updates on' : 'Waiting for server'}
+            {isConnected ? 'Sync Online' : 'Waiting for Sync'}
           </span>
-          <span className="text-sm text-slate-600">
-            Avg consultation: {avgConsultTime} minutes · Queue: {myQueue.length}
+          <span className="text-xs font-bold uppercase tracking-wider text-slate-500">
+            Avg consult: <span className="font-mono text-emerald-600 font-extrabold">{avgConsultTime}m</span> · Queue: <span className="font-mono text-slate-900 font-extrabold">{myQueue.length}</span>
           </span>
-          <button
-            className="rounded-md bg-slate-950 px-5 py-2 font-semibold text-white hover:bg-slate-800 disabled:cursor-not-allowed disabled:bg-slate-300"
-            disabled={!isConnected || isSaving || myQueue.length === 0}
-            onClick={handleCallNext}
-            type="button"
-          >
-            {isSaving ? 'Calling...' : 'Call Next Patient'}
-          </button>
-          <Link
-            to={`/doctor/${id}/profile`}
-            className="rounded-md border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50 shadow-sm transition"
-          >
-            My Profile Settings
-          </Link>
+          <div className="ml-auto flex items-center gap-2">
+            <button
+              className="rounded-xl bg-emerald-600 px-5 py-2.5 font-bold text-white shadow-lg shadow-emerald-600/10 hover:bg-emerald-700 hover:shadow-emerald-700/20 active:scale-[0.98] transition-all duration-200 disabled:cursor-not-allowed disabled:bg-slate-200 disabled:text-slate-400 disabled:shadow-none cursor-pointer text-xs uppercase tracking-wider"
+              disabled={!isConnected || isSaving || myQueue.length === 0}
+              onClick={handleCallNext}
+              type="button"
+            >
+              {isSaving ? 'Calling...' : 'Call Next'}
+            </button>
+            <Link
+              to={`/doctor/${id}/profile`}
+              className="rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-xs font-bold uppercase tracking-wider text-slate-700 hover:bg-slate-50 hover:border-slate-300 shadow-premium-sm transition duration-200"
+            >
+              Settings
+            </Link>
+          </div>
         </div>
 
         {error ? (
-          <div className="rounded-lg border border-rose-200 bg-rose-50 p-4 text-sm text-rose-800">
+          <div className="rounded-xl border border-rose-150 bg-rose-50/70 p-4 text-xs font-semibold leading-relaxed text-rose-700">
             {error}
           </div>
         ) : null}
 
-        <section className="grid gap-4 md:grid-cols-[1.3fr_1fr]">
+        <section className="grid gap-6 md:grid-cols-[1.3fr_1fr]">
           <div className="space-y-4">
             {liveCurrentPatient ? (
               <PatientCard patient={liveCurrentPatient} index={0} doctorId={id} />
             ) : (
-              <div className="rounded-lg border border-slate-200 bg-white p-6 text-slate-600 shadow-sm">
-                No patient is being seen right now.
+              <div className="rounded-2xl border border-slate-100 bg-white/80 backdrop-blur-sm p-6 text-xs font-semibold text-slate-400 shadow-premium-sm">
+                No patient is currently checking in or being seen.
               </div>
             )}
 
             {liveUpcoming.length > 0 ? (
               <div className="space-y-3">
-                <h2 className="text-lg font-semibold">Coming up next</h2>
+                <h2 className="text-xs font-bold uppercase tracking-wider text-slate-500">Coming up next</h2>
                 {liveUpcoming.map((patient, index) => (
                   <PatientCard
                     key={patient.id}
@@ -271,9 +273,9 @@ function DoctorDashboardPage() {
             ) : null}
           </div>
 
-          <aside className="space-y-4">
+          <aside className="space-y-6">
             <div>
-              <h2 className="mb-3 text-lg font-semibold">Today's booking summary</h2>
+              <h2 className="mb-3 text-xs font-bold uppercase tracking-wider text-slate-500">Today's booking summary</h2>
               <div className="grid grid-cols-2 gap-3">
                 <SummaryCard label="Booked" value={bookingSummary.booked} />
                 <SummaryCard label="Arrived" value={bookingSummary.arrived} tone="emphasised" />
@@ -284,20 +286,20 @@ function DoctorDashboardPage() {
               </div>
             </div>
 
-            <div className="rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
-              <h2 className="mb-3 font-semibold">Today's bookings</h2>
+            <div className="rounded-2xl border border-slate-100 bg-white/80 backdrop-blur-sm p-5 shadow-premium-sm">
+              <h2 className="mb-3 text-xs font-bold uppercase tracking-wider text-slate-500">Today's bookings</h2>
               {todaysBookings.length === 0 ? (
-                <p className="text-sm text-slate-600">No patients booked for today yet.</p>
+                <p className="text-xs text-slate-400 font-semibold">No appointments booked for today.</p>
               ) : (
-                <ul className="space-y-2 text-sm">
+                <ul className="space-y-2 text-xs divide-y divide-slate-100/60">
                   {todaysBookings.map((booking) => (
                     <li
                       key={booking.id}
-                      className="flex items-center justify-between gap-3 border-b border-slate-100 pb-2 last:border-0"
+                      className="flex items-center justify-between gap-3 pb-2 pt-2 first:pt-0 border-0"
                     >
-                      <span className="font-medium">{booking.patientName}</span>
-                      <span className="text-slate-500">{booking.time}</span>
-                      <span className="text-xs font-semibold uppercase text-slate-500">
+                      <span className="font-bold text-slate-800">{booking.patientName}</span>
+                      <span className="text-slate-450 font-medium font-mono">{booking.time}</span>
+                      <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-600 bg-emerald-50 border border-emerald-100 rounded-lg px-2 py-0.5">
                         {booking.status}
                       </span>
                     </li>
@@ -306,20 +308,20 @@ function DoctorDashboardPage() {
               )}
             </div>
 
-            <div className="rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
-              <h2 className="mb-3 font-semibold">Tomorrow's pre-bookings</h2>
+            <div className="rounded-2xl border border-slate-100 bg-white/80 backdrop-blur-sm p-5 shadow-premium-sm">
+              <h2 className="mb-3 text-xs font-bold uppercase tracking-wider text-slate-500">Tomorrow's pre-bookings</h2>
               {tomorrowsBookings.length === 0 ? (
-                <p className="text-sm text-slate-600">No pre-bookings for tomorrow.</p>
+                <p className="text-xs text-slate-400 font-semibold">No pre-bookings for tomorrow.</p>
               ) : (
-                <ul className="space-y-2 text-sm">
+                <ul className="space-y-2 text-xs divide-y divide-slate-100/60">
                   {tomorrowsBookings.map((booking) => (
                     <li
                       key={booking.id}
-                      className="flex items-center justify-between gap-3 border-b border-slate-100 pb-2 last:border-0"
+                      className="flex items-center justify-between gap-3 pb-2 pt-2 first:pt-0 border-0"
                     >
-                      <span className="font-medium">{booking.patientName}</span>
-                      <span className="text-slate-500">{booking.time}</span>
-                      <span className="text-xs font-semibold uppercase text-slate-500">
+                      <span className="font-bold text-slate-800">{booking.patientName}</span>
+                      <span className="text-slate-450 font-medium font-mono">{booking.time}</span>
+                      <span className="text-[10px] font-bold uppercase tracking-wider text-slate-500 bg-slate-50 border border-slate-150 rounded-lg px-2 py-0.5">
                         {booking.status}
                       </span>
                     </li>

@@ -6,14 +6,14 @@ import { getSpecialtyLabel } from '../shared/utils/symptomMapper'
 function HospitalCard({ hospital }) {
   return (
     <Link
-      className="block rounded-lg border border-slate-200 bg-white p-5 shadow-sm transition hover:border-emerald-400"
+      className="block rounded-2xl border border-slate-150/40 bg-white/90 p-6 shadow-premium-sm hover:border-emerald-500 hover:shadow-premium-md transition-all duration-300"
       to={`/hospital/${hospital.id}${hospital.matchingSpecialty ? `?specialty=${hospital.matchingSpecialty}` : ''}`}
     >
       <div className="flex items-start justify-between gap-4">
         <div className="min-w-0 flex-1">
-          <h3 className="text-lg font-semibold">{hospital.name}</h3>
-          <p className="mt-1 text-sm text-slate-500">{hospital.address}</p>
-          <div className="mt-2 flex flex-wrap items-center gap-3">
+          <h3 className="text-md font-extrabold text-slate-900">{hospital.name}</h3>
+          <p className="mt-1 text-xs text-slate-400 font-medium">{hospital.address}</p>
+          <div className="mt-3 flex flex-wrap items-center gap-3">
             <RatingStars rating={hospital.rating} totalRatings={hospital.totalRatings} />
             {hospital.matchingSpecialty ? (
               <SpecialtyBadge
@@ -24,12 +24,12 @@ function HospitalCard({ hospital }) {
           </div>
         </div>
         <div className="shrink-0 text-right">
-          <span className="inline-block rounded-full bg-emerald-100 px-3 py-1 text-xs font-semibold text-emerald-800">
+          <span className="inline-block rounded-xl bg-emerald-50 border border-emerald-100 px-3.5 py-1 text-2xs font-bold uppercase tracking-wider text-emerald-700">
             {hospital.doctorsAvailableToday} doctor{hospital.doctorsAvailableToday === 1 ? '' : 's'} today
           </span>
           {hospital.earliestSlot ? (
-            <p className="mt-2 text-xs text-slate-500">
-              Earliest: {hospital.earliestSlot}
+            <p className="mt-2 text-2xs font-bold uppercase tracking-wider text-slate-400">
+              Earliest: <span className="text-slate-600 font-mono">{hospital.earliestSlot}</span>
             </p>
           ) : null}
         </div>
