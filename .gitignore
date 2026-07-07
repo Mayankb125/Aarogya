@@ -1,0 +1,58 @@
+# Dependency directories
+node_modules/
+jspm_packages/
+web_stage/
+
+# Build & compilation outputs
+dist/
+build/
+out/
+.svelte-kit/
+.next/
+.nuxt/
+bin/
+obj/
+
+# Local Environment Variables & Secrets
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+*.env
+!.env.example
+
+# Service account credentials & private keys
+serviceAccountKey.json
+*serviceAccountKey*.json
+!serviceAccountKey.example.json
+
+# Logs and runtime databases
+*.log
+logs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+dev-server.log
+dev-server.err.log
+dev.log
+dev.err.log
+
+# Diagnostic & OS System Files
+.DS_Store
+Thumbs.db
+ehthumbs.db
+desktop.ini
+
+# Editor / IDE settings & project caches
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
+.eslintcache
+.parcel-cache
+.cache/
