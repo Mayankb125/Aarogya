@@ -91,7 +91,6 @@ Use these credentials to evaluate the role-based workflows:
 Patient account:    patient@aarogya.in   / password: test1234
 Doctor account:     doctor@aarogya.in    / password: test1234
 Receptionist PIN:   1234
-Admin account:      admin@aarogya.in     / password: test1234
 ```
 
 ---
