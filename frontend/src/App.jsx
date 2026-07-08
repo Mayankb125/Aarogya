@@ -69,9 +69,9 @@ function App() {
       <Route
         path="/receptionist"
         element={
-          <RequireAuth allowedRoles={['receptionist']}>
+          // <RequireAuth allowedRoles={['receptionist']}>
             <ReceptionistPage />
-          </RequireAuth>
+          // </RequireAuth>
         }
       />
       <Route
