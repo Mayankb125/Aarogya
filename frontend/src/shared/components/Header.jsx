@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { Link, useNavigate, useSearchParams, useLocation } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import logoImage from '../../assets/Aarogya.png'
+import { searchSymptoms } from '../services/symptomService'
 
 const NAV_LINKS = [
   { to: '/search', label: 'Find Doctor' },
@@ -15,13 +16,24 @@ function HeaderSearchBar() {
   const navigate = useNavigate()
   const [searchParams] = useSearchParams()
   const [input, setInput] = useState(searchParams.get('q') || '')
+  const [suggestions, setSuggestions] = useState([])
+  const [showSuggestions, setShowSuggestions] = useState(false)
 
   useEffect(() => {
     setInput(searchParams.get('q') || '')
   }, [searchParams])
 
+  useEffect(() => {
+    let active = true
+    searchSymptoms('').then(data => {
+      if (active) setSuggestions(data.suggestions || [])
+    }).catch(() => {})
+    return () => { active = false }
+  }, [])
+
   function handleSearchSubmit(e) {
     e.preventDefault()
+    setShowSuggestions(false)
     const trimmed = input.trim()
     if (trimmed) {
       navigate(`/search?q=${encodeURIComponent(trimmed)}`)
@@ -30,21 +42,54 @@ function HeaderSearchBar() {
     }
   }
 
+  function pickSuggestion(keyword) {
+    setInput(keyword)
+    setShowSuggestions(false)
+    navigate(`/search?q=${encodeURIComponent(keyword)}`)
+  }
+
+  const filtered = suggestions.filter(rule => 
+    rule.keyword.toLowerCase().includes(input.toLowerCase())
+  ).slice(0, 5)
+
   return (
-    <form onSubmit={handleSearchSubmit} className="relative hidden sm:block w-48 md:w-72 lg:w-96">
-      <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-        <svg className="h-4 w-4 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-        </svg>
-      </div>
-      <input
-        type="text"
-        placeholder="Search symptoms, clinics..."
-        value={input}
-        onChange={(e) => setInput(e.target.value)}
-        className="w-full rounded-full border border-slate-250 bg-slate-50 py-1.5 pl-9 pr-4 text-xs font-medium text-slate-900 outline-none placeholder:text-slate-450 focus:border-emerald-500 focus:bg-white focus:ring-1 focus:ring-emerald-500 transition shadow-sm"
-      />
-    </form>
+    <div className="relative hidden sm:block w-48 md:w-72 lg:w-96">
+      <form onSubmit={handleSearchSubmit} className="relative w-full">
+        <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+          <svg className="h-4 w-4 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+        </div>
+        <input
+          type="text"
+          placeholder="Search symptoms, clinics..."
+          value={input}
+          onChange={(e) => {
+            setInput(e.target.value)
+            setShowSuggestions(true)
+          }}
+          onFocus={() => setShowSuggestions(true)}
+          onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
+          className="w-full rounded-full border border-slate-250 bg-slate-50 py-1.5 pl-9 pr-4 text-xs font-medium text-slate-900 outline-none placeholder:text-slate-450 focus:border-emerald-500 focus:bg-white focus:ring-1 focus:ring-emerald-500 transition shadow-sm"
+        />
+      </form>
+
+      {showSuggestions && filtered.length > 0 ? (
+        <div className="absolute left-0 right-0 z-50 mt-2 overflow-hidden rounded-2xl border border-slate-100 bg-white/95 backdrop-blur-md shadow-premium-lg divide-y divide-slate-100 animate-fade-in">
+          {filtered.map((rule) => (
+            <button
+              className="block w-full px-4 py-2.5 text-left text-xs font-semibold text-slate-700 hover:bg-emerald-50/50 hover:text-emerald-800 transition duration-200 cursor-pointer"
+              key={rule.keyword}
+              onClick={() => pickSuggestion(rule.keyword)}
+              type="button"
+            >
+              <span className="font-bold text-slate-900">{rule.keyword}</span>
+              <span className="text-slate-400 font-medium"> → {rule.specialty}</span>
+            </button>
+          ))}
+        </div>
+      ) : null}
+    </div>
   )
 }
 

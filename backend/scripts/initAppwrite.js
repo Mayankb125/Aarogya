@@ -133,7 +133,7 @@ async function run() {
     await db.createStringAttribute(databaseId, "bookings", "patientName", 128, true);
     await db.createStringAttribute(databaseId, "bookings", "date", 10, true);
     await db.createStringAttribute(databaseId, "bookings", "time", 5, true);
-    await db.createEnumAttribute(databaseId, "bookings", "status", ["pending", "confirmed", "arrived", "completed", "cancelled"], true);
+    await db.createEnumAttribute(databaseId, "bookings", "status", ["pending", "confirmed", "arrived", "completed", "cancelled", "in_queue"], true);
     await db.createStringAttribute(databaseId, "bookings", "queuedAt", 30, false);
 
     await waitForAttributes("bookings", [

@@ -52,9 +52,17 @@ async function updateBooking(id, updates) {
     const db = getAppwriteDatabases();
     const dbId = getDatabaseId();
     try {
-      const doc = await db.updateDocument(dbId, "bookings", id, updates);
+      const allowedKeys = ["doctorId", "slotId", "patientName", "date", "time", "status", "queuedAt"];
+      const cleanUpdates = {};
+      for (const key of allowedKeys) {
+        if (updates[key] !== undefined) {
+          cleanUpdates[key] = updates[key];
+        }
+      }
+      const doc = await db.updateDocument(dbId, "bookings", id, cleanUpdates);
       return { id: doc.$id, ...doc };
     } catch (e) {
+      console.error("Appwrite updateBooking failed:", e);
       return null;
     }
   }
